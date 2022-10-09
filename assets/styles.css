@@ -1,0 +1,77 @@
+body {
+  background-color: #dddddd;
+  font-family: Verdana,sans-serif;
+  font-size: 14px;
+}
+
+li {
+  list-style-type: none;
+  margin: 0 auto;
+  padding: 10px;
+  background-color: #A9A9A9;
+  border-radius: 15px;
+  text-align: start;
+}
+
+h1 {
+  text-align: center;
+  color: #FF6000;
+}
+
+.addButton {
+  border: 0;
+  border-radius: 0.3rem;
+  background-color: rgb(2, 145, 2);
+  color: beige;
+  padding: 0.3rem;
+  opacity: 0.7;
+  transition: 0.3s;
+}
+
+.addButton:hover {
+  opacity: 1;
+  cursor: pointer;
+}
+
+.clearAllButton {
+  border: 0;
+  border-radius: 0.3rem;
+  background-color: red;
+  color: beige;
+  padding: 0.3rem;
+  opacity: 0.6;
+  transition: 0.3s;
+}
+
+.clearAllButton:hover {
+  opacity: 1;
+  cursor: pointer;
+}
+
+.inputField {
+  border-radius: 8px;
+  padding: 0.3rem;
+}
+
+.sourceUrl {
+  color: white;
+  transition: 0.3s;
+}
+
+.sourceUrl:hover {
+  color: darkblue;
+}
+
+.productInfo {
+  color: black;
+  width: fit-content;
+  margin-bottom: 10px;
+}
+
+.container {
+  text-align: center;
+}
+
+.listOfItems {
+  margin: 1.9rem;
+}
