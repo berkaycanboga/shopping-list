@@ -20,41 +20,45 @@ const fetchHepsiburadaData = source => {
     },
     body: JSON.stringify({ source })
   })
-  .then(res => res.json());
+  .then(res => res.json())
+  .catch(err => console.log(err.message)) 
 }
 
 const handleAddProduct = async () => {
   const productSource = inputField?.value;
-  if (!productSource || !productSource.includes('https://www.hepsiburada.com')) {
+  const productMeta = await fetchHepsiburadaData(productSource);
+  console.log(productMeta);
+  inputField.value = '';
+
+  if (productMeta.error) {
+    console.log(productMeta.error)
     return;
   }
-  const productMeta = await fetchHepsiburadaData(productSource);
   productMetaInformations.push(productMeta);
 
-  inputField.value = '';
-  updateProductDataInfoLocalStorage();
-  updateProductlist();
+  updateProductDataLocalStorage();
+  updateProductList();
 }
 
 const handleClearAllProduct = () => {
   productMetaInformations = [];
   listOfItems.innerHTML = '';
-  updateProductDataInfoLocalStorage();
+  updateProductDataLocalStorage();
 }
 
-const updateProductlist = () => {
+const updateProductList = () => {
   const productMetaInformationsHTML = productMetaInformations.map(productMeta => {
     return `<li class="productInfo"><strong>Name:</strong> ${productMeta.title} <br><strong>Price:</strong> ${productMeta.price} ${productMeta.currencyElement} <br> <a href="${productMeta.src}" target="_blank" class="sourceUrl">Go to Product</a></li>`;
   })
   listOfItems.innerHTML = productMetaInformationsHTML.join('');
 }
 
-const updateProductDataInfoLocalStorage = () => {
+const updateProductDataLocalStorage = () => {
   const stringifiedProductList = JSON.stringify(productMetaInformations);
   localStorage.setItem(CONSTANTS.LOCAL_STORAGE_KEYS.PRODUCT_LIST, stringifiedProductList)
 }
 
-updateProductlist();
+updateProductList();
 
 clearAllButton?.addEventListener('click', handleClearAllProduct);
 addButton?.addEventListener('click', handleAddProduct);
