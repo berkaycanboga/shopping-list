@@ -15,13 +15,13 @@ const fetchHepsiburadaProductMetaData = (src) => {
             return;
           }
 
-          const priceElement = $(this).find("[itemprop='price']")?.prop("content");
+          const priceElement = $(this).find("[itemprop='price']")?.prop("content").replace('.', ',');
           if (!priceElement || priceElement === '') {
             console.log('Price not found');
             return;
           }
 
-          let priceWithoutDiscount = $(this).find(".price-old").text();
+          let priceWithoutDiscount = $(this).find("[del='price-old active']").text();
           if (!priceWithoutDiscount || priceWithoutDiscount === '') {
             priceWithoutDiscount = 'There is no discount available'
           }
@@ -30,10 +30,15 @@ const fetchHepsiburadaProductMetaData = (src) => {
           if (!currencyElement || currencyElement === '') {
             return;
           }
-        
-          const price = parseFloat(priceElement).toFixed(2);
           
-          data = { title, priceWithoutDiscount, price, src, currencyElement };
+          let ratingValue = $(this).find(".rating-star").text();
+          if (!ratingValue || ratingValue === '') {
+            ratingValue = 'No rating information for this product';
+          }
+          
+          const price = priceElement + ' ' + currencyElement;
+
+          data = { title, priceWithoutDiscount, price, ratingValue, src };
       })
       return data;
     })
@@ -63,8 +68,11 @@ const fetchTrendyolProductMetaData = (src) => {
           if (!priceWithoutDiscount || priceWithoutDiscount === '') {
             priceWithoutDiscount = 'There is no discount available'
           }
+
+          const ratingValue = $(this).find(".review-tooltip-content div .tltp-avg-cnt").text();
+          console.log(ratingValue);
                   
-          data = { title, priceWithoutDiscount, price, src };
+          data = { title, priceWithoutDiscount, price, ratingValue, src };
       })
       return data;
     })

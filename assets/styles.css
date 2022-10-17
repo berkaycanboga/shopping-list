@@ -1,5 +1,5 @@
 body {
-  background-color: #dddddd;
+  background-color: #011429;
   font-family: Verdana,sans-serif;
   font-size: 14px;
 }
@@ -8,14 +8,14 @@ li {
   list-style-type: none;
   margin: 0 auto;
   padding: 10px;
-  background-color: #A9A9A9;
-  border-radius: 15px;
+  background-color: #dac06a;
+  border-radius: 10px;
   text-align: start;
 }
 
 h1 {
   text-align: center;
-  color: #FF6000;
+  color: #d34747;
 }
 
 .addButton {
@@ -24,7 +24,7 @@ h1 {
   background-color: rgb(2, 145, 2);
   color: beige;
   padding: 0.3rem;
-  opacity: 0.7;
+  opacity: 0.8;
   transition: 0.3s;
 }
 
@@ -39,7 +39,7 @@ h1 {
   background-color: red;
   color: beige;
   padding: 0.3rem;
-  opacity: 0.6;
+  opacity: 0.8;
   transition: 0.3s;
 }
 
@@ -51,6 +51,7 @@ h1 {
 .inputField {
   border-radius: 8px;
   padding: 0.3rem;
+  width: 15rem;
 }
 
 .sourceUrl {
@@ -63,6 +64,7 @@ h1 {
 }
 
 .productInfo {
+  position: relative;
   color: black;
   width: fit-content;
   margin-bottom: 10px;
@@ -74,4 +76,23 @@ h1 {
 
 .listOfItems {
   margin: 1.9rem;
+}
+
+.deleteButton {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  border: 0;
+  border-radius: 0.2rem;
+  background-color: red;
+  color: beige;
+  padding: 0.3rem;
+  opacity: 0.7;
+  transition: 0.3s;
+  width: 3rem;
+}
+
+.deleteButton:hover {
+  opacity: 1;
+  cursor: pointer;
 }
