@@ -69,8 +69,10 @@ const fetchTrendyolProductMetaData = (src) => {
             priceWithoutDiscount = 'There is no discount available'
           }
 
-          const ratingValue = $(this).find(".review-tooltip-content div .tltp-avg-cnt").text();
-          console.log(ratingValue);
+          let ratingValue = $(this).find(".review-tooltip-content div .tltp-avg-cnt").text();
+          if (!ratingValue || ratingValue === '') {
+            ratingValue = 'No rating information for this product';
+          }
                   
           data = { title, priceWithoutDiscount, price, ratingValue, src };
       })

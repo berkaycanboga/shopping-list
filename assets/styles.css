@@ -8,14 +8,14 @@ li {
   list-style-type: none;
   margin: 0 auto;
   padding: 10px;
-  background-color: #dac06a;
+  background-color: #fc7c27;
   border-radius: 10px;
   text-align: start;
 }
 
 h1 {
   text-align: center;
-  color: #d34747;
+  color: #fc7c27;
 }
 
 .addButton {

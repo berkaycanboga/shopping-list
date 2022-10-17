@@ -1,6 +1,6 @@
 const express = require('express');
 const app = express();
-const { fetchHepsiburadaProductMetaData, fetchTrendyolProductMetaData } = require('./callProductDataFunction');
+const { fetchHepsiburadaProductMetaData, fetchTrendyolProductMetaData } = require('./callProductData');
 const cors = require('cors');
 
 app.use(express.json());
