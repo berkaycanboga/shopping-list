@@ -10,7 +10,7 @@ const getProductsDataFromLocalStorage = () => {
   return JSON.parse(productListFromLocalStorage);
 }
 
-let productMetaInformations = getProductsDataFromLocalStorage() || [];
+let productMetaInformations = getProductsDataFromLocalStorage() || {};
 
 const fetchHepsiburadaData = source => {
   return fetch('http://localhost:5000/createProductMeta', {
@@ -25,8 +25,9 @@ const fetchHepsiburadaData = source => {
 }
 
 const handleAddProduct = async () => {
-
   const productSource = inputField?.value;
+  if (productMetaInformations[productSource]) return;
+
   const productMeta = await fetchHepsiburadaData(productSource);
   const generateId = Math.random().toString(36).substr(2, 9);
 
@@ -38,21 +39,20 @@ const handleAddProduct = async () => {
     return;
   }
 
-  productMetaInformations.push(productMeta);
+  productMetaInformations[productSource] = productMeta;
 
   updateProductDataLocalStorage();
   updateProductList();
 }
 
-const handleDeleteProduct = (id) => {
-  productMetaInformations = productMetaInformations.filter(productMeta => productMeta.id !== id);
+const handleDeleteProduct = (src) => {
+  productMetaInformations = delete productMetaInformations[src];
 
   updateProductDataLocalStorage();
   updateProductList();
 }
 
 const handleClearAllProduct = () => {
-
   productMetaInformations = [];
   listOfItems.innerHTML = '';
 
@@ -61,14 +61,14 @@ const handleClearAllProduct = () => {
 }
 
 const updateProductList = () => {
-  const productMetaInformationsHTML = productMetaInformations.map(productMeta => {
+  const productMetaInformationsHTML = Object.values(productMetaInformations).map(productMeta => {
     return `<li class="productInfo"
     <input type="hidden" id: ${productMeta.id}>
     <strong>Name:</strong> ${productMeta.title}
     <br><strong>Without Discount:</strong> ${productMeta.priceWithoutDiscount} <br><strong>Price:</strong> ${productMeta.price} 
     <br><strong>Rating:</strong> ${productMeta.ratingValue}
     <br><a href="${productMeta.src}" target="_blank" class="sourceUrl">Go to Product</a>
-    <button onclick="handleDeleteProduct('${productMeta.id}')" class="deleteButton">X</button>
+    <button onclick="handleDeleteProduct('${productMeta.src}')" class="deleteButton">X</button>
     </li>`;
   })
   listOfItems.innerHTML = productMetaInformationsHTML.join('');
